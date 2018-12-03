@@ -1,6 +1,7 @@
 package com.xulizhi.shop.service;
 
 import com.xulizhi.shop.domain.Category;
+import com.xulizhi.shop.form.CategoryForm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,10 +29,10 @@ public class CategoryServiceTest {
 
     @Test
     public void saveCategory() {
-        Category category = new Category();
-        category.setId("1543824739697880859");
-        category.setName("测试类目01");
-        category = categoryService.saveCategory(category);
+        CategoryForm categoryForm = new CategoryForm();
+        categoryForm.setId("1543844553710170091");
+        categoryForm.setName("测试类目09");
+        Category category = categoryService.saveCategory(categoryForm);
         log.info("category{}",category);
     }
 }

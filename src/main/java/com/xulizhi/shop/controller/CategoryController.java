@@ -45,22 +45,20 @@ public class CategoryController {
 
     /**
      * 保存获更新类目
-     * @param form
+     * @param categoryForm
      * @param bindingResult
      * @param map
      * @return
      */
     @PostMapping("saveCategory")
-    public ModelAndView saveCategory(@Valid CategoryForm form, BindingResult bindingResult, Map<String, Object> map){
+    public ModelAndView saveCategory(@Valid CategoryForm categoryForm, BindingResult bindingResult, Map<String, Object> map){
         if(bindingResult.hasErrors()){
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
             map.put("url", "/shop/category/index");
             return new ModelAndView("common/error", map);
         }
-        Category category = new Category();
-        BeanUtils.copyProperties(form,category);
         try{
-            categoryService.saveCategory(category);
+            categoryService.saveCategory(categoryForm);
         }catch(Exception e){
             map.put("msg", e.getMessage());
             map.put("url", "/shop/category/index");

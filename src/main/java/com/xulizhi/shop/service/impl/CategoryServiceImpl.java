@@ -32,14 +32,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category saveCategory(Category category) {
+    public Category saveCategory(CategoryForm categoryForm) {
         Category saveCategory = new Category();
-        if(!Objects.equals(null,category.getId())){
-            saveCategory = getCategoryById(category.getId());
+        if(!Objects.equals(null,categoryForm.getId())){
+            saveCategory = getCategoryById(categoryForm.getId());
+            BeanUtils.copyProperties(categoryForm,saveCategory);
         }else{
-            category.setId(KeyUtil.genUniqueKey());
+            BeanUtils.copyProperties(categoryForm,saveCategory);
+            saveCategory.setId(KeyUtil.genUniqueKey());
+
         }
-        BeanUtils.copyProperties(category,saveCategory);
         return categoryRepository.save(saveCategory);
     }
 }

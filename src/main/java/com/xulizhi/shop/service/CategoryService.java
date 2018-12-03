@@ -1,6 +1,7 @@
 package com.xulizhi.shop.service;
 
 import com.xulizhi.shop.domain.Category;
+import com.xulizhi.shop.form.CategoryForm;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public interface CategoryService {
 
     /**
      * 保存或更新类目
-     * @param category
+     * @param categoryForm
      * @return
      */
-    Category saveCategory(Category category);
+    Category saveCategory(CategoryForm categoryForm);
 }
