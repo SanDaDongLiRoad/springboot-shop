@@ -7,6 +7,7 @@ import com.xulizhi.shop.service.CategoryService;
 import com.xulizhi.shop.service.GoodService;
 import com.xulizhi.shop.vo.BuyerGoodListVO;
 import com.xulizhi.shop.vo.BuyerGoodVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,12 +41,7 @@ public class GoodServiceImpl implements GoodService{
             List<Good> goods = goodRepository.findByCategoryId(category.getId());
             for(int j=0;j<goods.size();j++){
                 BuyerGoodVO buyerGoodVO = new BuyerGoodVO();
-                Good good = goods.get(j);
-                buyerGoodVO.setId(good.getId());
-                buyerGoodVO.setName(good.getName());
-                buyerGoodVO.setPrice(good.getPrice());
-                buyerGoodVO.setIcon(good.getIcon());
-                buyerGoodVO.setDescription(good.getDescription());
+                BeanUtils.copyProperties(goods.get(j),buyerGoodVO);
                 buyerGoods.add(buyerGoodVO);
             }
             buyerGoodListVO.setBuyerGoods(buyerGoods);
