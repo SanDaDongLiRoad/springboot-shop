@@ -11,4 +11,6 @@ import java.util.List;
 public interface GoodRepository extends JpaRepository<Good,String>{
 
     List<Good> findByStatus(Integer status);
+
+    List<Good> findByCategoryId(String categoryId);
 }
