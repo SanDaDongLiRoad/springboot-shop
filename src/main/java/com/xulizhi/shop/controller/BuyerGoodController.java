@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * 买家商品Controller
  * @author lenovo
  */
 @Slf4j
