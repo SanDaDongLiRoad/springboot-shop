@@ -7,6 +7,7 @@ import com.xulizhi.shop.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,7 +17,8 @@ import java.util.List;
  * @author lenovo
  */
 @Slf4j
-@RestController("buyerGood")
+@RestController
+@RequestMapping("buyerGood")
 public class BuyerGoodController {
 
     @Autowired
