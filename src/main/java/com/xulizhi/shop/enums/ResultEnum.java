@@ -13,6 +13,7 @@ public enum ResultEnum {
     PARAM_ERROR(1, "参数不正确"),
     ERROR(-1,"未知错误"),
     GOOD_NOT_EXIST(10, "商品不存在"),
+    WECHAT_MP_ERROR(20, "微信公众账号方面错误"),
     GOOD_STATUS_ERROR(24, "商品状态不正确");
 
     /**
