@@ -48,7 +48,7 @@ public class SellerGoodController {
             Good good = goodService.findGoodById(id);
             map.put("good",good);
         }
-        List<Category> categoryList = categoryService.listCategory();
+        List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
         map.put("categoryList",categoryList);
         return new ModelAndView("product/index", map);
     }

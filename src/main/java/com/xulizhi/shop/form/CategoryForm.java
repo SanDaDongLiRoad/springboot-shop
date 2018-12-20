@@ -1,6 +1,7 @@
 package com.xulizhi.shop.form;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author lenovo
@@ -16,6 +17,7 @@ public class CategoryForm {
     /**
      * 类目名称
      */
+    @NotEmpty(message = "类目名称必填")
     private String name;
 
 }

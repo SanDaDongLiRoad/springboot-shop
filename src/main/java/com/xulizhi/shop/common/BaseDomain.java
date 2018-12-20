@@ -1,5 +1,6 @@
 package com.xulizhi.shop.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -24,10 +25,12 @@ public class BaseDomain implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd hh24:mm:ss a", locale="zh", timezone="GMT+8")
     private Date createTime;
 
     /**
      *  更新时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd hh24:mm:ss a", locale="zh", timezone="GMT+8")
     private Date updateTime;
 }

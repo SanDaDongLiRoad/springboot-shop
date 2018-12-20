@@ -6,7 +6,7 @@ import lombok.Getter;
  * @author 10133
  */
 @Getter
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnum{
 
     UNPAID(0,"未支付"),
     PAID(1,"已支付");

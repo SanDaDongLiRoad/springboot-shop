@@ -5,8 +5,10 @@ import com.xulizhi.shop.form.CategoryForm;
 import com.xulizhi.shop.repository.CategoryRepository;
 import com.xulizhi.shop.service.CategoryService;
 import com.xulizhi.shop.utils.KeyUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,14 +29,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> listCategory() {
-        return categoryRepository.findAll();
+    public List<Category> listCategoryOrderByUpdate() {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        return categoryRepository.findAll(sort);
     }
 
     @Override
     public Category saveCategory(CategoryForm categoryForm) {
         Category saveCategory = new Category();
-        if(!Objects.equals(null,categoryForm.getId())){
+        if(StringUtils.isNotEmpty(categoryForm.getId())){
             saveCategory = getCategoryById(categoryForm.getId());
             BeanUtils.copyProperties(categoryForm,saveCategory);
         }else{

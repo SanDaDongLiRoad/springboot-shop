@@ -21,7 +21,7 @@ public interface CategoryService {
      * 获取类目列表
      * @return
      */
-    List<Category> listCategory();
+    List<Category> listCategoryOrderByUpdate();
 
     /**
      * 保存或更新类目

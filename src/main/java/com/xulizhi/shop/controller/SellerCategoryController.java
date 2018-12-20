@@ -54,7 +54,7 @@ public class SellerCategoryController {
     @GetMapping("listCategory")
     public ModelAndView listCategory(Map<String, Object> map){
 
-        List<Category> categoryList = categoryService.listCategory();
+        List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
         map.put("categoryList", categoryList);
         return new ModelAndView("category/list", map);
     }
@@ -70,17 +70,18 @@ public class SellerCategoryController {
     public ModelAndView saveCategory(@Valid CategoryForm categoryForm, BindingResult bindingResult, Map<String, Object> map){
         if(bindingResult.hasErrors()){
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/shop/category/index");
+            map.put("url", "/shop/sellerCategory/indexCatagory");
             return new ModelAndView("common/error", map);
         }
         try{
             categoryService.saveCategory(categoryForm);
         }catch(Exception e){
+            e.printStackTrace();
             map.put("msg", e.getMessage());
-            map.put("url", "/shop/category/index");
+            map.put("url", "/shop/sellerCategory/indexCatagory");
             return new ModelAndView("common/error", map);
         }
-        map.put("url", "/shop/category/list");
+        map.put("url", "/shop/sellerCategory/listCategory");
         return new ModelAndView("common/success", map);
     }
 }
