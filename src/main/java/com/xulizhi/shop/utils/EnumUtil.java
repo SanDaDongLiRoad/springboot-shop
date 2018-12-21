@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class EnumUtil {
 
-    public static <T extends CodeEnum> T getByCode(Integer code,Class<T> enumClass){
+    public static <T extends CodeEnum> T getEnumByCode(Integer code,Class<T> enumClass){
         for(T each : enumClass.getEnumConstants()){
             if(Objects.equals(code,each.getCode())){
                 return each;

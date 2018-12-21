@@ -1,6 +1,7 @@
 package com.xulizhi.shop.service;
 
 import com.xulizhi.shop.domain.Good;
+import com.xulizhi.shop.form.GoodForm;
 import com.xulizhi.shop.vo.BuyerGoodListVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,5 +45,12 @@ public interface GoodService {
      * @return
      */
     Good offSale(String id);
+
+    /**
+     * 保存或更新商品
+     * @param goodform
+     * @return
+     */
+    Good saveGood(GoodForm goodform);
 
 }

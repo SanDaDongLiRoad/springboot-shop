@@ -6,7 +6,7 @@ import lombok.Getter;
  * @author lenovo
  */
 @Getter
-public enum GoodStatusEnum {
+public enum GoodStatusEnum implements CodeEnum{
 
     /**
      * 商品状态为在架

@@ -5,11 +5,14 @@ import com.xulizhi.shop.domain.Good;
 import com.xulizhi.shop.enums.GoodStatusEnum;
 import com.xulizhi.shop.enums.ResultEnum;
 import com.xulizhi.shop.exception.BaseException;
+import com.xulizhi.shop.form.GoodForm;
 import com.xulizhi.shop.repository.GoodRepository;
 import com.xulizhi.shop.service.CategoryService;
 import com.xulizhi.shop.service.GoodService;
+import com.xulizhi.shop.utils.KeyUtil;
 import com.xulizhi.shop.vo.BuyerGoodListVO;
 import com.xulizhi.shop.vo.BuyerGoodVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -87,5 +90,19 @@ public class GoodServiceImpl implements GoodService{
         }
         good.setStatus(GoodStatusEnum.DOWN.getCode());
         return goodRepository.save(good);
+    }
+
+    @Override
+    public Good saveGood(GoodForm goodform) {
+        Good saveGood = new Good();
+        if(StringUtils.isNotEmpty(goodform.getId())){
+            saveGood = goodRepository.findOne(goodform.getId());
+            BeanUtils.copyProperties(goodform,saveGood);
+        }else{
+            BeanUtils.copyProperties(goodform,saveGood);
+            saveGood.setId(KeyUtil.genUniqueKey());
+        }
+        goodRepository.save(saveGood);
+        return saveGood;
     }
 }

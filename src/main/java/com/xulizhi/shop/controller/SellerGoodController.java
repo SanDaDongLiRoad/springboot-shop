@@ -4,6 +4,7 @@ package com.xulizhi.shop.controller;
 import com.xulizhi.shop.domain.Category;
 import com.xulizhi.shop.domain.Good;
 import com.xulizhi.shop.exception.BaseException;
+import com.xulizhi.shop.form.GoodForm;
 import com.xulizhi.shop.service.CategoryService;
 import com.xulizhi.shop.service.GoodService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -50,7 +54,7 @@ public class SellerGoodController {
         }
         List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
         map.put("categoryList",categoryList);
-        return new ModelAndView("product/index", map);
+        return new ModelAndView("good/index", map);
     }
 
     /**
@@ -63,11 +67,11 @@ public class SellerGoodController {
     @GetMapping("listGoodByPage")
     public ModelAndView listGoodByPage(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, Map<String, Object> map){
         PageRequest pageRequest = new PageRequest(page - 1, size);
-        Page<Good> goodList = goodService.listGoodByPage(pageRequest);
-        map.put("goodList", goodList);
+        Page<Good> goodPage = goodService.listGoodByPage(pageRequest);
+        map.put("goodPage", goodPage);
         map.put("currentPage", page);
         map.put("size", size);
-        return new ModelAndView("product/list", map);
+        return new ModelAndView("good/list", map);
     }
 
     /**
@@ -107,6 +111,25 @@ public class SellerGoodController {
         }
 
         map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
+    }
+
+    @PostMapping("saveGood")
+    public ModelAndView saveGood(@Valid GoodForm goodForm, BindingResult bindingResult,Map<String,Object> map){
+        if(bindingResult.hasErrors()){
+            map.put("msg", bindingResult.getFieldError().getDefaultMessage());
+            map.put("url", "/shop/sellerGood/indexSellerGood");
+            return new ModelAndView("common/error", map);
+        }
+        try{
+            goodService.saveGood(goodForm);
+        }catch(Exception e){
+            e.printStackTrace();
+            map.put("msg", e.getMessage());
+            map.put("url", "/shop/sellerGood/indexSellerGood");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("url", "/shop/sellerGood/listGoodByPage");
         return new ModelAndView("common/success", map);
     }
 }

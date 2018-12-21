@@ -1,6 +1,9 @@
 package com.xulizhi.shop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xulizhi.shop.common.BaseDomain;
+import com.xulizhi.shop.enums.GoodStatusEnum;
+import com.xulizhi.shop.utils.EnumUtil;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -48,5 +51,10 @@ public class Good extends BaseDomain{
      * 类目ID
      */
     private String categoryId;
+
+    @JsonIgnore
+    public GoodStatusEnum getGoodStatusEnum(){
+        return EnumUtil.getEnumByCode(status,GoodStatusEnum.class);
+    }
 
 }
