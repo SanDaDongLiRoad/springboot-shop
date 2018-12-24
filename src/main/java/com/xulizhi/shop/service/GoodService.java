@@ -53,4 +53,18 @@ public interface GoodService {
      */
     Good saveGood(GoodForm goodform);
 
+    /**
+     * 加库存
+     * @param id 商品ID
+     * @param stock 库存数
+     */
+    void increaseStock(String id,Integer stock);
+
+    /**
+     * 减库存
+     * @param id 商品ID
+     * @param stock 库存数
+     */
+    void decreaseStock(String id,Integer stock);
+
 }

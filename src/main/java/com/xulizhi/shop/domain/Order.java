@@ -2,8 +2,11 @@ package com.xulizhi.shop.domain;
 
 import com.xulizhi.shop.common.BaseDomain;
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**
@@ -11,6 +14,9 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
+@Table(name="tb_order")
 public class Order extends BaseDomain{
 
     private static final long serialVersionUID = -2284612546640923998L;

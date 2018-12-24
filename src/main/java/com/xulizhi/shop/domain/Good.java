@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@Table(name="tb_good")
 public class Good extends BaseDomain{
 
     private static final long serialVersionUID = 6553377955521129177L;

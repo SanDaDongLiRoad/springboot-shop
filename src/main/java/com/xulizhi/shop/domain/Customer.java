@@ -2,14 +2,20 @@ package com.xulizhi.shop.domain;
 
 import com.xulizhi.shop.common.BaseDomain;
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author lenovo
  */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
+@Table(name="tb_customer")
 public class Customer extends BaseDomain {
 
 

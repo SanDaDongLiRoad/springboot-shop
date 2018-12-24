@@ -19,6 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -105,5 +107,29 @@ public class GoodServiceImpl implements GoodService{
         }
         goodRepository.save(saveGood);
         return saveGood;
+    }
+
+    @Override
+    @Transactional
+    public void increaseStock(String id, Integer stock) {
+        Good good = goodRepository.findOne(id);
+        if(Objects.equals(null,good)){
+            throw new BaseException(ResultEnum.GOOD_NOT_EXIST);
+        }
+        Integer resultStock = good.getStock() + stock;
+        good.setStock(resultStock);
+        goodRepository.save(good);
+    }
+
+    @Override
+    @Transactional
+    public void decreaseStock(String id, Integer stock) {
+        Good good = goodRepository.findOne(id);
+        if(Objects.equals(null,good)){
+            throw new BaseException(ResultEnum.GOOD_NOT_EXIST);
+        }
+        Integer resultStock = good.getStock() - stock;
+        good.setStock(resultStock);
+        goodRepository.save(good);
     }
 }

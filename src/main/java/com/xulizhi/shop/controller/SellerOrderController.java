@@ -1,6 +1,8 @@
 package com.xulizhi.shop.controller;
 
 import com.xulizhi.shop.dto.OrderDTO;
+import com.xulizhi.shop.enums.ResultEnum;
+import com.xulizhi.shop.exception.BaseException;
 import com.xulizhi.shop.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,25 @@ public class SellerOrderController {
         map.put("currentPage", page);
         map.put("size", size);
         return new ModelAndView("order/list", map);
+    }
+
+    /**
+     * 取消订单
+     * @param id
+     * @return
+     */
+    @GetMapping("/cancel")
+    public ModelAndView cancel(@RequestParam("id") String id,Map<String, Object> map) {
+        try {
+            orderService.cancel(id);
+        } catch (BaseException e) {
+            log.error("【卖家端取消订单】发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/shop/sellerOrder/listOrder");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMsg());
+        map.put("url", "/shop/sellerOrder/listOrder");
+        return new ModelAndView("common/success");
     }
 }

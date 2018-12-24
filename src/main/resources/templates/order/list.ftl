@@ -36,7 +36,7 @@
                                         <td>${orderDTO.createTime}</td>
                                         <td><a href="/shop/sellerOrder/sellerOrderDetail?id=${orderDTO.orderId}">详情</a></td>
                                         <td>
-                                            <#if orderDTO.getOrderStatusEnum().message == "新订单">
+                                            <#if orderDTO.getOrderStatusEnum().msg == "新订单">
                                                 <a href="/shop/sellerOrder/cancel?id=${orderDTO.orderId}">取消</a>
                                             </#if>
                                         </td>
