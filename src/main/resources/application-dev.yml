@@ -9,9 +9,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
-  jackson:
-    time-zone: GMT+8
-
 wechat:
   mpAppId: wx2c9123db004a728f
   mpAppSecret: 7d8df054212596d59283a65e1aee3543
