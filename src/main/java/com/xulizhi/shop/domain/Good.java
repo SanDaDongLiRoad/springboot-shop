@@ -5,6 +5,8 @@ import com.xulizhi.shop.common.BaseDomain;
 import com.xulizhi.shop.enums.GoodStatusEnum;
 import com.xulizhi.shop.utils.EnumUtil;
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
@@ -14,6 +16,8 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class Good extends BaseDomain{
 
     private static final long serialVersionUID = 6553377955521129177L;

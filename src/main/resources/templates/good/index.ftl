@@ -9,8 +9,9 @@
             <div class="container-fluid">
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <form role="form" method="post" action="/shop/sellerGood/save">
+                        <form role="form" method="post" action="/shop/sellerGood/saveGood">
                             <div class="row">
+                                <input hidden type="text" name="id" value="${(good.id)!''}">
                                 <div class="form-group col-xs-3">
                                     <label>类目</label>
                                     <select name="categoryId" class="form-control input-sm">
@@ -47,14 +48,16 @@
                                 <div class="form-group col-xs-12">
                                     <label>图片</label>
                                     <input id="icon" name="icon" type="text" hidden="hidden" value="${(good.icon)!''}"/>
-
                                     <div class="file-loading">
                                         <input id="input-id" type="file">
                                         <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过1M</p>
                                     </div>
                                 </div>
-                                <input hidden type="text" name="id" value="${(good.id)!''}">
-                                <button type="submit" class="btn btn-default">提交</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="submit" class="btn btn-default">提交</button>
+                                </div>
                             </div>
                         </form>
                     </div>

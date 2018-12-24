@@ -86,11 +86,10 @@ public class SellerGoodController {
             goodService.onSale(id);
         } catch (BaseException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", "/shop/sellerGood/listGoodByPage");
             return new ModelAndView("common/error", map);
         }
-
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/shop/sellerGood/listGoodByPage");
         return new ModelAndView("common/success", map);
     }
 
@@ -106,11 +105,11 @@ public class SellerGoodController {
             goodService.offSale(id);
         } catch (BaseException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", "/shop/sellerGood/listGoodByPage");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/shop/sellerGood/listGoodByPage");
         return new ModelAndView("common/success", map);
     }
 

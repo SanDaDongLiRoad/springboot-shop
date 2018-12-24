@@ -39,13 +39,13 @@
                                             <td>${good.createTime}</td>
                                             <td>${good.updateTime}</td>
                                             <td>
-                                                <a href="/shop/sellerGood/indexCatagory?id=${good.id}">修改</a>
+                                                <a href="/shop/sellerGood/indexSellerGood?id=${good.id}">修改</a>
                                             </td>
                                             <td>
                                                 <#if good.getGoodStatusEnum().msg == "在架">
-                                                    <a href="/sell/seller/product/off_sale?productId=${good.id}">下架</a>
+                                                    <a href="/shop/sellerGood/offSale?id=${good.id}">下架</a>
                                                 <#else>
-                                                    <a href="/sell/seller/product/on_sale?productId=${good.id}">上架</a>
+                                                    <a href="/shop/sellerGood/onSale?id=${good.id}">上架</a>
                                                 </#if>
                                             </td>
                                         </tr>
