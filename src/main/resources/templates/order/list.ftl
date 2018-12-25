@@ -38,6 +38,8 @@
                                         <td>
                                             <#if orderDTO.getOrderStatusEnum().msg == "新订单">
                                                 <a href="/shop/sellerOrder/cancel?id=${orderDTO.orderId}">取消</a>
+                                                <#else >
+                                                <a href="#" style="color: #222222">取消</a>
                                             </#if>
                                         </td>
                                     </tr>
@@ -114,7 +116,7 @@
                 console.log('建立连接');
             }
 
-            websocket.onclose = function (event) {2
+            websocket.onclose = function (event) {
                 console.log('连接关闭');
             }
 

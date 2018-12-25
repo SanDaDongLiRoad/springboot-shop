@@ -27,6 +27,13 @@ public class SellerOrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 分页查询订单列表
+     * @param page
+     * @param size
+     * @param map
+     * @return
+     */
     @GetMapping("listOrder")
     public ModelAndView listOrder(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size, Map<String, Object> map){
         PageRequest request = new PageRequest(page - 1, size);
@@ -53,6 +60,42 @@ public class SellerOrderController {
             return new ModelAndView("common/error", map);
         }
         map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMsg());
+        map.put("url", "/shop/sellerOrder/listOrder");
+        return new ModelAndView("common/success");
+    }
+
+    /**
+     * 订单详情
+     * @param id
+     * @param map
+     * @return
+     */
+    @GetMapping("sellerOrderDetail")
+    public ModelAndView sellerOrderDetail(@RequestParam("id") String id,Map<String, Object> map){
+        OrderDTO orderDTO = new OrderDTO();
+        try{
+            orderDTO = orderService.getSellerOrderDetail(id);
+        }catch(BaseException e){
+            log.error("【卖家端查询订单详情】发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/shop/sellerOrder/listOrder");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("orderDTO", orderDTO);
+        return new ModelAndView("order/detail", map);
+    }
+
+    @GetMapping("finishOrder")
+    public ModelAndView sellerOrderFinish(@RequestParam("id") String id,Map<String, Object> map){
+        try {
+            orderService.finishOrder(id);
+        } catch (BaseException e) {
+            log.error("【卖家端完结订单】发生异常{}", e);
+            map.put("msg", e.getMessage());
+            map.put("url", "/shop/sellerOrder/listOrder");
+            return new ModelAndView("common/error", map);
+        }
+        map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMsg());
         map.put("url", "/shop/sellerOrder/listOrder");
         return new ModelAndView("common/success");
     }

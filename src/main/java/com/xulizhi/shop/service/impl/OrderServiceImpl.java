@@ -1,9 +1,11 @@
 package com.xulizhi.shop.service.impl;
 
 import com.xulizhi.shop.domain.Customer;
+import com.xulizhi.shop.domain.Good;
 import com.xulizhi.shop.domain.Order;
 import com.xulizhi.shop.domain.OrderGoodRelation;
 import com.xulizhi.shop.dto.OrderDTO;
+import com.xulizhi.shop.dto.OrderDetailDTO;
 import com.xulizhi.shop.enums.OrderStatusEnum;
 import com.xulizhi.shop.enums.ResultEnum;
 import com.xulizhi.shop.exception.BaseException;
@@ -20,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -89,5 +92,45 @@ public class OrderServiceImpl implements OrderService {
         //如果已支付, 需要退款
 
         return order;
+    }
+
+    @Override
+    public OrderDTO getSellerOrderDetail(String id) {
+        Order order = orderRepository.findOne(id);
+        if(Objects.equals(null,order)){
+            throw new BaseException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderId(order.getId());
+        orderDTO.setAmount(order.getAmount());
+        orderDTO.setStatus(order.getStatus());
+        List<OrderDetailDTO> orderDetailDTOList = new ArrayList<OrderDetailDTO>();
+        List<OrderGoodRelation> orderGoodRelationList = orderGoodRelationService.queryOrderGoodRelationByOrderId(id);
+        for(int i=0;i<orderGoodRelationList.size();i++){
+            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+            OrderGoodRelation orderGoodRelation = orderGoodRelationList.get(i);
+            Good good = goodService.findGoodById(orderGoodRelation.getGoodId());
+            orderDetailDTO.setGoodId(orderGoodRelation.getGoodId());
+            orderDetailDTO.setGoodName(good.getName());
+            orderDetailDTO.setPrice(good.getPrice());
+            orderDetailDTO.setQuantity(orderGoodRelation.getQuantity());
+            orderDetailDTO.setAmount(good.getPrice().multiply(BigDecimal.valueOf(orderGoodRelation.getQuantity())));
+            orderDetailDTOList.add(orderDetailDTO);
+        }
+        orderDTO.setOrderDetailDTOList(orderDetailDTOList);
+        return orderDTO;
+    }
+
+    @Override
+    @Transactional
+    public void finishOrder(String id) {
+        Order order = orderRepository.findOne(id);
+        if(!Objects.equals(OrderStatusEnum.NEW.getCode(),order.getStatus())){
+            throw new BaseException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+        order.setStatus(OrderStatusEnum.FINISHED.getCode());
+        orderRepository.save(order);
+        //推送微信模版消息
+//        pushMessageService.orderStatus(orderDTO);
     }
 }

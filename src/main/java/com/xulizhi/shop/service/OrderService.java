@@ -23,4 +23,17 @@ public interface OrderService {
      * @return
      */
     Order cancel(String id);
+
+    /**
+     * 根据订单id查询订单详情
+     * @param id
+     * @return
+     */
+    OrderDTO getSellerOrderDetail(String id);
+
+    /**
+     * 完结订单
+     * @param id
+     */
+    void finishOrder(String id);
 }

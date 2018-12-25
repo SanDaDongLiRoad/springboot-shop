@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lenovo
@@ -64,5 +65,10 @@ public class OrderDTO {
     public PayStatusEnum getPayStatusEnum(){
         return EnumUtil.getEnumByCode(payStatus,PayStatusEnum.class);
     }
+
+    /**
+     * 订单详情列表
+     */
+    private List<OrderDetailDTO> orderDetailDTOList;
 
 }
