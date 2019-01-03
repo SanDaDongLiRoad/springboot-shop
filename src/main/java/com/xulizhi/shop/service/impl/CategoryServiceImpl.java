@@ -29,8 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> listCategoryOrderByUpdate() {
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+    public List<Category> listCategoryOrderByCreate() {
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         return categoryRepository.findAll(sort);
     }
 
@@ -46,5 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         }
         return categoryRepository.save(saveCategory);
+    }
+
+    @Override
+    public Category getCategoryByName(String name) {
+        return categoryRepository.findByName(name);
     }
 }

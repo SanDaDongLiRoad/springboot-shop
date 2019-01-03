@@ -54,7 +54,7 @@ public class SellerCategoryController {
     @GetMapping("listCategory")
     public ModelAndView listCategory(Map<String, Object> map){
 
-        List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
+        List<Category> categoryList = categoryService.listCategoryOrderByCreate();
         map.put("categoryList", categoryList);
         return new ModelAndView("category/list", map);
     }

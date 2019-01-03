@@ -21,7 +21,7 @@ public interface CategoryService {
      * 获取类目列表
      * @return
      */
-    List<Category> listCategoryOrderByUpdate();
+    List<Category> listCategoryOrderByCreate();
 
     /**
      * 保存或更新类目
@@ -29,4 +29,11 @@ public interface CategoryService {
      * @return
      */
     Category saveCategory(CategoryForm categoryForm);
+
+    /**
+     * 根据类目名称获取单个类目
+     * @param name
+     * @return
+     */
+    Category getCategoryByName(String name);
 }

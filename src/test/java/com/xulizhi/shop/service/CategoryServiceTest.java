@@ -23,7 +23,7 @@ public class CategoryServiceTest {
 
     @Test
     public void listCategory() {
-        List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
+        List<Category> categoryList = categoryService.listCategoryOrderByCreate();
         log.info("categoryList{}",categoryList);
     }
 

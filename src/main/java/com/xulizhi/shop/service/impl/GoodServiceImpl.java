@@ -41,7 +41,7 @@ public class GoodServiceImpl implements GoodService{
     public List<BuyerGoodListVO> listBuyerGood() {
 
         List<BuyerGoodListVO> buyerGoodListVOList = new ArrayList<BuyerGoodListVO>();
-        List<Category> categoryList = categoryService.listCategoryOrderByUpdate();
+        List<Category> categoryList = categoryService.listCategoryOrderByCreate();
 
         for(int i=0;i<categoryList.size();i++){
             BuyerGoodListVO buyerGoodListVO = new BuyerGoodListVO();

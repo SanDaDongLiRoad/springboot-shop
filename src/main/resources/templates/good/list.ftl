@@ -45,7 +45,7 @@
                                                 <#if good.getGoodStatusEnum().msg == "在架">
                                                     <a href="/shop/sellerGood/offSale?id=${good.id}">下架</a>
                                                 <#else>
-                                                    <a href="/shop/sellerGood/onSale?id=${good.id}">上架</a>
+                                                    <a href="/shop/sellerGood/onSale?id=${good.id}" ><font color="#a9a9a9">上架</font></a>
                                                 </#if>
                                             </td>
                                         </tr>
