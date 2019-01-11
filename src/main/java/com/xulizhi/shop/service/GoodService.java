@@ -67,4 +67,11 @@ public interface GoodService {
      */
     void decreaseStock(String id,Integer stock);
 
+    /**
+     * 根据类目ID查询在架商品
+     * @param categroyId
+     * @return
+     */
+    List<Good> listUpGoodByCategroy(String categroyId);
+
 }

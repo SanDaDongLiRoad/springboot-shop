@@ -49,7 +49,7 @@ public class GoodServiceImpl implements GoodService{
             Category category = categoryList.get(i);
             buyerGoodListVO.setId(category.getId());
             buyerGoodListVO.setName(category.getName());
-            List<Good> goods = goodRepository.findByCategoryId(category.getId());
+            List<Good> goods = listUpGoodByCategroy(category.getId());
             for(int j=0;j<goods.size();j++){
                 BuyerGoodVO buyerGoodVO = new BuyerGoodVO();
                 BeanUtils.copyProperties(goods.get(j),buyerGoodVO);
@@ -131,5 +131,10 @@ public class GoodServiceImpl implements GoodService{
         Integer resultStock = good.getStock() - stock;
         good.setStock(resultStock);
         goodRepository.save(good);
+    }
+
+    @Override
+    public List<Good> listUpGoodByCategroy(String categroyId) {
+        return goodRepository.findByCategoryIdAndStatus(categroyId, GoodStatusEnum.UP.getCode());
     }
 }
